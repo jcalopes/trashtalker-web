@@ -15,7 +15,7 @@
   },
   "include": [
     "src", "src/__tests__"
-  ],
+, "hooks.ts"  ],
   "exclude": [
     "node_modules"
   ]
