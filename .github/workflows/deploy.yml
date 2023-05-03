@@ -31,7 +31,7 @@ jobs:
         with:
           github_token: ${{ secrets.ACCESS_TOKEN }}
       - name: Log in to Docker Hub
-        uses: docker/login-action@3da7dc6e2b31f99ef2cb9fb4c50fb0971e0d0139
+        uses: docker/login-action@40891eba8c2bcd1309b07ba8b11232f313e86779
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
