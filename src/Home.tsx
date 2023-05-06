@@ -1,22 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { getRoutes } from './api/RoutesService';
-import { Route } from './model/Route';
+import React, {useEffect, useState} from 'react';
+import {Measurement} from './model/Measurement';
 
 
 function Home() {
-    const [routes, setRoutes] = useState<Route[]>();
+   const [measurements, setMeasurements] = useState<Measurement[]>([]);
 
-    useEffect(()=>{
-        getRoutes().then(routesList => setRoutes(routesList));
-    },[]);
+   useEffect(() => {
+      const sse = new EventSource('measurements/stream', {withCredentials: true});
 
-    return (
-        <div>
-            <>
-            {routes?.map((route,index) => (<span key={`route-${index}`}>{route.name}</span>))}
-            </>
-        </div>
-    );
+      sse.addEventListener('open', () => {
+         console.log('SSE connection established.');
+      });
+
+      sse.addEventListener('measure', (e) => {
+         const measure: Measurement = JSON.parse(e.data);
+         setMeasurements((measurements) => [...measurements, measure])
+      });
+
+      sse.addEventListener('error', (e) => {
+         console.error('Error: ', e);
+      });
+
+      return () => {
+         sse.close();
+      };
+   }, []);
+
+   return (
+      <div>
+         {measurements?.map((route, index) => (<p key={`route-${index}`}>{route.distance}</p>))}
+      </div>
+   );
 }
 
 export default Home;

@@ -9,14 +9,17 @@ module.exports = merge(common, {
    devServer: {
       static: './dist',
       port: 3000,
+      compress: false,
       hot: true,
       historyApiFallback: true,
       proxy: {
-         '/api': {
-            pathRewrite: {
-               '^/api': '',
-            },
-            target: 'http://localhost:8080/',
+         '/container': {
+            target: 'http://localhost:8098/',
+            secure: false,
+            changeOrigin: true,
+         },
+         '/measurements/stream': {
+            target: 'http://localhost:8098/',
             secure: false,
             changeOrigin: true,
          },
@@ -29,3 +32,18 @@ module.exports = merge(common, {
       new ReactRefreshWebpackPlugin(),
    ],
 });
+
+/*
+ const sse = new EventSource('api/measurements/stream', {withCredentials: true});
+ function getRealtimeData(data) {
+    console.log(data);
+ }
+ sse.onmessage = e => getRealtimeData(JSON.parse(e.data));
+ sse.onerror = (ev) => {
+    console.log('error',ev);
+    sse.close();
+ }
+ return () => {
+    sse.close();
+ };
+*/

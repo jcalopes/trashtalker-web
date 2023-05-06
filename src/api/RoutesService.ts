@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { Route } from '../model/Route';
+import { Measurement } from '../model/Measurement';
 
-async function getRoutes(): Promise<Route[]> {
+async function getRoutes(): Promise<Measurement[]> {
    try {
-      const { data, status } = await axios.get<Route[]>('api/routes', {
+      const { data, status } = await axios.get<Measurement[]>('/container', {
          headers: {
             Accept: 'application/json',
          },
