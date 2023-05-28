@@ -1,36 +1,26 @@
-import React, {useEffect, useState} from 'react';
-import {Measurement} from './model/Measurement';
-
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import ContainerPage from './components/container/ContainerPage'
+import HomePage from './components/Homepage'
+import LoginPage from './components/auth/LoginPage'
 
 function Home() {
-   const [measurements, setMeasurements] = useState<Measurement[]>([]);
-
-   useEffect(() => {
-      const sse = new EventSource('measurements/stream', {withCredentials: true});
-
-      sse.addEventListener('open', () => {
-         console.log('SSE connection established.');
-      });
-
-      sse.addEventListener('measure', (e) => {
-         const measure: Measurement = JSON.parse(e.data);
-         setMeasurements((measurements) => [...measurements, measure])
-      });
-
-      sse.addEventListener('error', (e) => {
-         console.error('Error: ', e);
-      });
-
-      return () => {
-         sse.close();
-      };
-   }, []);
-
-   return (
-      <div>
-         {measurements?.map((route, index) => (<p key={`route-${index}`}>{route.distance}</p>))}
-      </div>
-   );
+    return (
+        <Routes>
+            <Route
+                path="/"
+                element={<HomePage />}
+            />
+            <Route
+                path="/login"
+                element={<LoginPage />}
+            />
+            <Route
+                path="/container"
+                element={<ContainerPage />}
+            />
+        </Routes>
+    )
 }
 
-export default Home;
+export default Home
