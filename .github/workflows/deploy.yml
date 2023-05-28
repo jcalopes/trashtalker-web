@@ -33,8 +33,8 @@ jobs:
               uses: docker/metadata-action@c4ee3adeed93b1fa6a762f209fb01608c1a22f1e
               with:
                   images: lopesdev/trashtalker-web
-            -  name: Build Package
-               run: npm run build
+            - name: Build Package
+              run: npm run build
             - name: Build and Push Image
               uses: docker/build-push-action@eafaea8d0f5853934deece2ffa67af59d936562b
               with:
