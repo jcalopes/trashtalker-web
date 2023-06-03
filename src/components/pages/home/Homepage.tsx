@@ -1,15 +1,12 @@
-import React, { useState } from 'react'
-import { Dialog } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import React from 'react';
+import { Dialog } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom';
+import useHome from './useHomepage';
 
 function HomePage() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const navigation = [
-        { name: 'Product', href: '#' },
-        { name: 'Features', href: '#' },
-        { name: 'Marketplace', href: '#' },
-        { name: 'Company', href: '#' },
-    ]
+    const { navigation, mobileMenuOpen, setMobileMenuOpen } = useHome();
+    const navigate = useNavigate();
 
     return (
         <div className="bg-white">
@@ -55,13 +52,15 @@ function HomePage() {
                             </a>
                         ))}
                     </div>
-                    <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <a
-                            href="#"
-                            className="text-sm font-semibold leading-6 text-gray-900"
-                        >
+                    <div
+                        className="hidden lg:flex lg:flex-1 lg:justify-end"
+                        onClick={() => {
+                            navigate('/login');
+                        }}
+                    >
+                        <span className="text-sm font-semibold leading-6 text-gray-900">
                             Log in <span aria-hidden="true">&rarr;</span>
-                        </a>
+                        </span>
                     </div>
                 </nav>
                 <Dialog
@@ -190,7 +189,7 @@ function HomePage() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default HomePage
+export default HomePage;
