@@ -17,7 +17,7 @@ module.exports = merge(common, {
                 secure: false,
                 changeOrigin: true,
             },
-            '/measurements/stream': {
+            '/measurement/stream': {
                 target: 'http://localhost:8098/',
                 secure: false,
                 changeOrigin: true,

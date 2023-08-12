@@ -156,8 +156,9 @@ function HomePage() {
                             Moving toward smart cities.
                         </h1>
                         <p className="mt-6 text-lg leading-8 text-gray-600">
-                            Trashtalker is a tool armed with real time data providing a centralized monitoring system to
-                            keep waste management a more sustainable craft.
+                            Trashtalker is a tool armed with real time data
+                            providing a centralized monitoring system to keep
+                            waste management a more sustainable craft.
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <a

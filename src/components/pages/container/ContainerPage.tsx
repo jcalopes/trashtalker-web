@@ -5,7 +5,9 @@ function ContainerPage() {
     const [measurements, setMeasurements] = useState<Measurement[]>([]);
 
     useEffect(() => {
-        const sse = new EventSource('measurements/stream', { withCredentials: true });
+        const sse = new EventSource('measurement/stream', {
+            withCredentials: true,
+        });
 
         sse.addEventListener('open', () => {
             console.log('SSE connection established.');
@@ -13,6 +15,7 @@ function ContainerPage() {
 
         sse.addEventListener('measure', (e) => {
             const measure: Measurement = JSON.parse(e.data);
+            console.log(e.data);
             setMeasurements((measurements) => [...measurements, measure]);
         });
 

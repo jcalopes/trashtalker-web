@@ -8,7 +8,7 @@ function Home() {
     return (
         <Routes>
             <Route
-                path="/"
+                path="/contain"
                 element={<HomePage />}
             />
             <Route
@@ -17,7 +17,7 @@ function Home() {
             />
 
             <Route
-                path="/container"
+                path="/"
                 element={<ContainerPage />}
             />
         </Routes>
