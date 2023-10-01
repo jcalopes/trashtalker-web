@@ -26,12 +26,9 @@ jobs:
                UPDATE_TYPE: ${{ inputs.update_type }}
             shell: bash
             run: |
-               git config user.name medium-demo
-               git config user.email medium-demo@github.com
                npm version $UPDATE_TYPE -m "Released new NPM package version: %s"
                npm echo "//npm.pkg.github.com/:authToken=$ACCESS_TOKEN" >> .npmrc
                npm i webpack
                npm run build
                npm publish
-               git push --tags
-               git push
+
