@@ -8,7 +8,7 @@ on:
             description: patch/minor/major
             type: string
 jobs:
-   #   npm-publish:
+   #npm-publish:
    #      runs-on: ubuntu-latest
    #      steps:
    #         -  name: Generate webpack bundle
@@ -25,7 +25,6 @@ jobs:
    #               npm run build
    #               npm publish
    publish-gpr:
-      needs: build
       runs-on: ubuntu-latest
       permissions:
          packages: write
