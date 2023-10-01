@@ -25,7 +25,7 @@ jobs:
                cache: 'npm'
          -  name: Generate webpack bundle
             env:
-               ACCESS_TOKEN: ${{ secrets.NPM_TOKEN }}
+               ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                UPDATE_TYPE: ${{ inputs.update_type }}
             shell: bash
             run: |
