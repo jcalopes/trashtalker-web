@@ -11,15 +11,6 @@ jobs:
    npm-publish:
       runs-on: ubuntu-latest
       steps:
-         -  name: Checkout Repository
-            uses: actions/checkout@v4
-            with:
-               fetch-depth: 0
-         -  name: Setup Node.js
-            uses: actions/setup-node@v3
-            with:
-               node-version: '20.6.1'
-               cache: 'npm'
    #         -  name: Generate webpack bundle
    #            env:
    #               ACCESS_TOKEN: ${{ secrets.NPM_TOKEN }}
