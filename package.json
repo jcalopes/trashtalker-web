@@ -36,8 +36,5 @@
    "main": "dist/main.bundle.js",
    "repository": {
       "url": "https://github.com/jcalopes/trashtalker-web.git"
-   },
-   "publishConfig": {
-      "@jcalopes:registry": "https://npm.pkg.github.com"
    }
 }
