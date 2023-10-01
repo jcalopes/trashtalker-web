@@ -31,7 +31,7 @@ jobs:
               npm version $UPDATE_TYPE -m "Released new NPM package version: %s"
               npm echo "//npm.pkg.github.com/:authToken=$ACCESS_TOKEN" >> .npmrc
               npm i webpack
-              CI=false npm run build
+              npm run build
               npm publish
               git push --tags
               git push
