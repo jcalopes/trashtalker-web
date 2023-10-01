@@ -1,0 +1,51 @@
+name: Continuous Deployment
+on:
+  push:
+    branches: master
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Build
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+  push_to_registry:
+    name: Deploy New Version
+    if: ${{ !contains(github.event.head_commit.message, '#skipDeploy') }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Generate Tag
+        uses: mathieudutour/github-tag-action@v6.1
+        id: tag_version
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+      - name: Log in to Docker Hub
+        uses: docker/login-action@40891eba8c2bcd1309b07ba8b11232f313e86779
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@c4ee3adeed93b1fa6a762f209fb01608c1a22f1e
+        with:
+          images: lopesdev/trashtalker-web
+      - name: ls
+        run: ls
+      - name: Build and Push Image
+        uses: docker/build-push-action@eafaea8d0f5853934deece2ffa67af59d936562b
+        with:
+          context: .
+          push: true
+          tags: lopesdev/trashtalker-web:${{ steps.tag_version.outputs.new_tag }}
+          labels: ${{ steps.meta.outputs.labels }}

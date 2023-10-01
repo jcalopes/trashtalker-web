@@ -1,0 +1,37 @@
+name: Release npm package
+
+on:
+   workflow_dispatch:
+      inputs:
+         update_type:
+            required: true
+            description: patch/minor/major
+            type: string
+jobs:
+   npm-publish:
+      runs-on: ubuntu-latest
+      steps:
+         - name: Checkout Repository
+           uses: actions/checkout@v4
+           with:
+              fetch-depth: 0
+         - name: Setup Node.js
+           uses: actions/setup-node@v3
+           with:
+              node-version: '20.6.1'
+              cache: 'npm'
+         - name: Generate webpack bundle
+           env:
+              ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              UPDATE_TYPE: ${{ inputs.update_type }}
+           shell: bash
+           run: |
+              git config user.name medium-demo
+              git config user.email medium-demo@github.com
+              npm version $UPDATE_TYPE -m "Released new NPM package version: %s"
+              npm echo "//npm.pkg.github.com/:authToken=$ACCESS_TOKEN >> .npmrc
+              npm i webpack
+              CI=false npm run build
+              npm publish
+              git push --tags
+              git push

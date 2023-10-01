@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "outDir": "./dist/",
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "jsx": "react",
+    "module": "es2020",
+    "moduleResolution": "node",
+    "strict": true,
+    "sourceMap": true,
+    "target": "es5",
+    "resolveJsonModule": true,
+  },
+  "include": [
+    "src", "src/__tests__"
+, "hooks.ts"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
