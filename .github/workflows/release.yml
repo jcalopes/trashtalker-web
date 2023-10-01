@@ -31,5 +31,6 @@ jobs:
                npm version $UPDATE_TYPE -m "Released new NPM package version: %s"
                npm i webpack
                npm run build
+               npm publish
 
 
