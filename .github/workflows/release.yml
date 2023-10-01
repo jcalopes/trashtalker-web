@@ -8,9 +8,9 @@ on:
             description: patch/minor/major
             type: string
 jobs:
-   npm-publish:
-      runs-on: ubuntu-latest
-      steps:
+   #   npm-publish:
+   #      runs-on: ubuntu-latest
+   #      steps:
    #         -  name: Generate webpack bundle
    #            env:
    #               ACCESS_TOKEN: ${{ secrets.NPM_TOKEN }}
