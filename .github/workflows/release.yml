@@ -10,10 +10,22 @@ on:
 jobs:
    npm-publish:
       runs-on: ubuntu-latest
+      permissions:
+         packages: write
+         contents: read
       steps:
+         -  name: Checkout Repository
+            uses: actions/checkout@v4
+            with:
+               fetch-depth: 0
+         -  name: Setup Node.js
+            uses: actions/setup-node@v3
+            with:
+               node-version: '20.6.1'
+               cache: 'npm'
          -  name: Generate webpack bundle
             env:
-               ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+               ACCESS_TOKEN: ${{ secrets.NPM_TOKEN }}
                UPDATE_TYPE: ${{ inputs.update_type }}
             shell: bash
             run: |
