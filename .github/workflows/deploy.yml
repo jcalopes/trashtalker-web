@@ -43,7 +43,7 @@ jobs:
       - name: ls
         run: ls
       - name: Build and Push Image
-        uses: docker/build-push-action@eafaea8d0f5853934deece2ffa67af59d936562b
+        uses: docker/build-push-action@ef1fb9688fc3626d0fd5e462f502cbbdc6456feb
         with:
           context: .
           push: true
